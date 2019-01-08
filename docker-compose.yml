@@ -9,12 +9,17 @@ services:
       - '443:443'
     links:
       - 'php:php'
+    volumes:
+      - './src:/usr/local/apache2/htdocs'
+      - './containers/apache/config:/usr/local/apache2/conf/extra'
   php:
     container_name: iim_php
     hostname: iim_php
     build: ./containers/php
     links:
       - 'mysql:mysql'
+    volumes:
+      - './src:/var/www/html'
   mysql:
     container_name: iim_mysql
     hostname: iim_mysql
